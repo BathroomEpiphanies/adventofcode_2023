@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import operator
-import sys
 
 from dataclasses import dataclass
 from functools import reduce
@@ -46,17 +45,11 @@ class BallSet:
         return self.red * self.green * self.blue
 
 
-def star1(problem_input:list[list[BallSet]]) -> int:
+def part1(problem_input:list[list[BallSet]]) -> int:
     ball_counts = BallSet(red=12, green=13, blue=14)
     return sum(id_ for id_,game in enumerate(problem_input, 1)
                if not any(pick>ball_counts for pick in game))
 
 
-def star2(problem_input:list[list[BallSet]]) -> int:
+def part2(problem_input:list[list[BallSet]]) -> int:
     return sum(abs(reduce(operator.or_, game)) for game in problem_input)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

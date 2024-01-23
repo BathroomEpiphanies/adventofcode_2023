@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from dataclasses import dataclass
 from collections import defaultdict
 from itertools import combinations, count, cycle, product
@@ -116,7 +114,7 @@ class BrickPile:
             print(''.join(str(c) for c in row))
 
 
-def star1(problem_input:BrickPile) -> int:
+def part1(problem_input:BrickPile) -> int:
     problem_input.compact_pile()
     problem_input.find_supporters()
     single_supporters = set()
@@ -126,7 +124,7 @@ def star1(problem_input:BrickPile) -> int:
     return len(problem_input.bricks)-1 - len(single_supporters)
 
 
-def star2(problem_input:BrickPile) -> int:
+def part2(problem_input:BrickPile) -> int:
     problem_input.compact_pile()
     problem_input.find_supporters()
     for brick,supporter in problem_input.supporters.items():
@@ -148,9 +146,3 @@ def star2(problem_input:BrickPile) -> int:
             to_remove = new_to_remove
         total += len(problem_input.bricks)-len(supporter_copy)-2
     return total
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

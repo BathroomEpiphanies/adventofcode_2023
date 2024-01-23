@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from collections import defaultdict
 
 
@@ -18,11 +16,11 @@ def hash(string:str) -> int:
     return current_value
 
 
-def star1(problem_input:list[str]) -> int:
+def part1(problem_input:list[str]) -> int:
     return sum(hash(s) for s in problem_input)    
 
 
-def star2(problem_input:list[str]) -> int:
+def part2(problem_input:list[str]) -> int:
     # dict key insertion order is persistent on iteration
     boxes:dict[int,dict[str,int]] = defaultdict(dict)
     for lens in problem_input:
@@ -40,9 +38,3 @@ def star2(problem_input:list[str]) -> int:
         for box_number,box in boxes.items() \
         for lens_slot,(_,focal_length) in enumerate(box.items(), start=1)
     )
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

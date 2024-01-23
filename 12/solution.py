@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from functools import cache
 
 
@@ -31,17 +29,11 @@ def fit_lengths_to_spring(spring:str, lengths:tuple[int,...]):
     return total
 
 
-def star1(problem_input:list[tuple[str,tuple[int,...]]]) -> int:
+def part1(problem_input:list[tuple[str,tuple[int,...]]]) -> int:
     return sum(fit_lengths_to_spring(spring+'.', tuple(lengths)) \
                for spring,lengths in problem_input)
 
 
-def star2(problem_input:list[tuple[str,tuple[int,...]]]) -> int:
+def part2(problem_input:list[tuple[str,tuple[int,...]]]) -> int:
     return sum(fit_lengths_to_spring('?'.join([spring]*5)+'.', lengths*5) \
                for spring,lengths in problem_input)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

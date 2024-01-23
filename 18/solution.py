@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 
 def parse_input(file_handle) -> list[tuple[str,int,str]]:
     digs = []
@@ -33,18 +31,12 @@ def integrate_trench(dig_instructions:list[tuple[str,int]]):
     return integral+circumference//2+1
 
 
-def star1(problem_input:list[tuple[str,int,str]]) -> int:
+def part1(problem_input:list[tuple[str,int,str]]) -> int:
     dig_instructions = [(d,l) for d,l,*_ in problem_input]
     return integrate_trench(dig_instructions)
 
 
-def star2(problem_input:list[tuple[str,int,str]]) -> int:
+def part2(problem_input:list[tuple[str,int,str]]) -> int:
     directions = {'0':'R', '1':'D', '2':'L', '3':'U'}
     dig_instructions = [(directions[color[-1]],int(color[1:-1],16)) for _,_,color in problem_input]
     return integrate_trench(dig_instructions)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

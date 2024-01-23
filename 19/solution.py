@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-import sys
 
 from copy import copy
 from dataclasses import dataclass
@@ -64,7 +63,7 @@ ACCEPT = Workflow([])
 REJECT = Workflow([])
 
 
-def star1(problem_input:tuple[dict[str,Workflow],list[Part]]) -> int:
+def part1(problem_input:tuple[dict[str,Workflow],list[Part]]) -> int:
     workflows,parts = problem_input
     
     def evaluate_workflow_on_part(name:str, part:Part):
@@ -119,7 +118,7 @@ class Ranges:
         return copy_
 
 
-def star2(problem_input:tuple[dict[str,Workflow],list[Part]]) -> int:
+def part2(problem_input:tuple[dict[str,Workflow],list[Part]]) -> int:
     workflows,_ = problem_input
     
     accepted_ranges = []
@@ -132,9 +131,3 @@ def star2(problem_input:tuple[dict[str,Workflow],list[Part]]) -> int:
     
     find_accepted_ranges('in', Ranges([1,4000], [1,4000], [1,4000], [1,4000]))
     return sum(abs(r) for r in accepted_ranges)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from dataclasses import dataclass
 from more_itertools import chunked
 
@@ -50,7 +48,7 @@ def parse_input(file_handle) -> tuple[list[int],list[Map]]:
     return seeds,maps
 
 
-def star1(problem_input:tuple[list[int],list[Map]]) -> int:
+def part1(problem_input:tuple[list[int],list[Map]]) -> int:
     locations = []
     seeds,maps = problem_input
     for seed in seeds:
@@ -60,7 +58,7 @@ def star1(problem_input:tuple[list[int],list[Map]]) -> int:
     return min(locations)
 
 
-def star2(problem_input:tuple[list[int],list[Map]]) -> int:
+def part2(problem_input:tuple[list[int],list[Map]]) -> int:
     def find_min_recursively(maps:list[Map], lower:int, upper:int) -> int:
         # Add "guard" intervals, of length 0, to make sure the whole interval is covered.
         # Look at intervals pairwise.
@@ -86,9 +84,3 @@ def star2(problem_input:tuple[list[int],list[Map]]) -> int:
     for start,length in chunked(seeds, 2):
         locations.append( find_min_recursively(maps, start, start+length) )
     return min(locations)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

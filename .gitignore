@@ -1,6 +1,10 @@
 # Advent of Code
 *.in
 *.ans
+*.meta
+*.pdf
+*.dot
+*.svg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

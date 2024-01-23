@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import functools
-import sys
 
 
 def parse_input(file_handle) -> list[Card]:
@@ -34,19 +33,13 @@ class Card:
     __repr__ = __str__
 
 
-def star1(problem_input:list[Card]) -> int:
+def part1(problem_input:list[Card]) -> int:
     return sum(c.point_value() for c in problem_input)
 
 
-def star2(problem_input:list[Card]) -> int:
+def part2(problem_input:list[Card]) -> int:
     @functools.cache
     def card_return(pos:int) -> int:
         matches = problem_input[pos].matches
         return matches + sum(card_return(i) for i in range(pos+1,pos+matches+1))
     return sum(1+card_return(pos) for pos,_ in enumerate(problem_input))
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

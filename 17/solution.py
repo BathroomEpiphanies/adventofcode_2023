@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from dataclasses import dataclass
 from enum import Enum
 from queue import PriorityQueue
@@ -61,7 +59,6 @@ class Graph:
                 if not node2 in found:
                     found.add(node2)
                     queue.put(QueueItem(item.heatloss+heatloss, node2, item.history+[node2.position]))
-        print(item.history)
         return item.heatloss
     
     def clear(self):
@@ -72,7 +69,7 @@ class Graph:
             self.__edges[node] = self.generate_edges(node)
         return self.__edges[node]
     
-    def generate_edges_star1(self, node:Node) -> dict[Node,int]:
+    def generate_edges_part1(self, node:Node) -> dict[Node,int]:
         edges = {}
         for d in DIR:
             if node.position+d not in self.heatloss_map or \
@@ -82,7 +79,7 @@ class Graph:
             edges[Graph.Node(node.position+d, (*node.history,d)[-3:])] = self.heatloss_map[node.position+d]
         return edges
     
-    def generate_edges_star2(self, node:Node) -> dict[Node,int]:
+    def generate_edges_part2(self, node:Node) -> dict[Node,int]:
         edges = {}
         for d in DIR:
             if d==node.history[-1] or -d==node.history[-1]:
@@ -94,19 +91,13 @@ class Graph:
         return edges
 
 
-def star1(problem_input:Graph) -> int:
+def part1(problem_input:Graph) -> int:
     problem_input.clear()
-    problem_input.generate_edges = problem_input.generate_edges_star1
+    problem_input.generate_edges = problem_input.generate_edges_part1
     return problem_input.minimize_heatloss()
 
 
-def star2(problem_input:Graph) -> int:
+def part2(problem_input:Graph) -> int:
     problem_input.clear()
-    problem_input.generate_edges = problem_input.generate_edges_star2
+    problem_input.generate_edges = problem_input.generate_edges_part2
     return problem_input.minimize_heatloss()
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

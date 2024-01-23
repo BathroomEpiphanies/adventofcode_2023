@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from itertools import cycle
 from math import lcm
 
@@ -25,19 +23,13 @@ def find_distance(position, route, maps):
     return distance
 
 
-def star1(problem_input) -> int:
+def part1(problem_input) -> int:
     route,maps = problem_input
     return find_distance('AAA', route, maps)
 
 
-def star2(problem_input) -> int:
+def part2(problem_input) -> int:
     route,maps = problem_input
     positions = {p for p in maps if p[-1] == 'A'}
     cycles = {find_distance(p, route, maps) for p in positions}
     return lcm(*cycles)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    #print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

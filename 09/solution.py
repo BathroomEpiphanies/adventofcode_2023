@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from copy import copy
 
 
@@ -20,16 +18,10 @@ def extrapolate_sequence(sequence:list[int]):
     return differences[0]
 
 
-def star1(problem_input:list[list[int]]) -> int:
+def part1(problem_input:list[list[int]]) -> int:
     #print(problem_input)
     return sum(extrapolate_sequence(s)[-1] for s in problem_input)
 
 
-def star2(problem_input:list[list[int]]) -> int:
+def part2(problem_input:list[list[int]]) -> int:
     return sum(extrapolate_sequence(s)[0] for s in problem_input)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

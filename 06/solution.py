@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-import sys
 
 from math import ceil, floor, sqrt
 
@@ -18,7 +17,7 @@ def hold_range_to_win(duration:int, record:int) -> tuple[int,int]:
     return ceil(duration/2-sqrt(duration**2//4-_record)), floor(duration/2+sqrt(duration**2//4-_record))
 
 
-def star1(problem_input:tuple[list[int], list[int]]) -> int:
+def part1(problem_input:tuple[list[int], list[int]]) -> int:
     durations,records = problem_input
     margin = 1
     for duration,record in zip(durations, records):
@@ -27,15 +26,9 @@ def star1(problem_input:tuple[list[int], list[int]]) -> int:
     return margin
 
 
-def star2(problem_input:tuple[list[int], list[int]]) -> int:
+def part2(problem_input:tuple[list[int], list[int]]) -> int:
     durations,records = problem_input
     duration = int(''.join(str(t) for t in durations))
     record = int(''.join(str(r) for r in records))
     lower,upper = hold_range_to_win(duration, record)
     return upper-lower+1
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

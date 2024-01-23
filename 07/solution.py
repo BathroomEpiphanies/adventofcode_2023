@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sys
 import enum
 
 from collections import Counter
@@ -93,19 +92,13 @@ class Hand:
     
 
 
-def star1(problem_input:list[Hand]) -> int:
+def part1(problem_input:list[Hand]) -> int:
     return sum(r*h.bid for r,h in enumerate(sorted(problem_input), 1))
 
 
-def star2(problem_input:list[Hand]) -> int:
+def part2(problem_input:list[Hand]) -> int:
     for hand in problem_input:
         hand.cards = [Card._1 if c is Card._J else c for c in hand.cards]
     for hand in problem_input:
         hand.type = HandType.parse(hand)
     return sum(r*h.bid for r,h in enumerate(sorted(problem_input), 1))
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

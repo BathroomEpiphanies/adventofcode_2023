@@ -1,11 +1,11 @@
-import sys
+from __future__ import annotations
 
 
 def parse_input(file_handle) -> list[str]:
     return [l.strip() for l in file_handle.readlines()]
 
 
-def star1(problem_input:list[str]) -> int:
+def part1(problem_input:list[str]) -> int:
     sum:int = 0
     for line in problem_input:
         digits = [a for a in line if a in ['0','1','2','3','4','5','6','7','8','9']]
@@ -32,15 +32,9 @@ def find_first_number(string:str, reversed:bool=False):
                 return digit
 
 
-def star2(problem_input:list[str]) -> int:
+def part2(problem_input:list[str]) -> int:
     sum:int = 0
     for line in problem_input:
         sum += 10*find_first_number(line, reversed=False)
         sum += find_first_number(line, reversed=True)
     return sum
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

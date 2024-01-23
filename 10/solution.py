@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from collections import deque
 from math import ceil
 
@@ -83,18 +81,12 @@ class PipeSystem:
                     queue.append(q)
 
 
-def star1(problem_input:PipeSystem) -> int:
+def part1(problem_input:PipeSystem) -> int:
     return ceil(problem_input.cycle_length/2)
 
 
-def star2(problem_input:PipeSystem) -> int:
+def part2(problem_input:PipeSystem) -> int:
     #print(PipeSystem.system_to_string(problem_input.pipe_system))
     #print(PipeSystem.system_to_string(problem_input.visited))
     #print(PipeSystem.system_to_string(problem_input.inside))
     return len(problem_input.inside)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

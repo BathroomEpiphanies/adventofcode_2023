@@ -3,7 +3,6 @@ from typing import Iterable
 
 import operator
 import pprint
-import sys
 
 from functools import reduce
 from itertools import product
@@ -81,15 +80,9 @@ class Machine:
         return sum
 
 
-def star1(problem_input:Machine) -> int:
+def part1(problem_input:Machine) -> int:
     return problem_input.part_sum()
 
 
-def star2(problem_input:Machine) -> int:
+def part2(problem_input:Machine) -> int:
     return problem_input.gear_sum()
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

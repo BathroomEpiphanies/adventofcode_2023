@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from collections import defaultdict
 from enum import Enum
 
@@ -94,16 +92,10 @@ class Forest:
             self.paths[node2][node1] = length
 
 
-def star1(problem_input:Forest) -> int:
+def part1(problem_input:Forest) -> int:
     return problem_input.find_longest_possible_path()
 
 
-def star2(problem_input:Forest) -> int:
+def part2(problem_input:Forest) -> int:
     problem_input.remove_slopes()
     return problem_input.find_longest_possible_path()
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from collections import deque
 from enum import Enum
 
@@ -44,11 +42,11 @@ def energization_from_start(device:dict[complex,str], entry_point:complex, direc
     return len({p for p,_ in visited})
 
 
-def star1(problem_input:dict[complex,str]) -> int:
+def part1(problem_input:dict[complex,str]) -> int:
     return energization_from_start(problem_input, -1+0j, DIR.RG)
 
 
-def star2(problem_input:dict[complex,str]) -> int:
+def part2(problem_input:dict[complex,str]) -> int:
     maxx = round(max(p.real for p in problem_input))
     maxy = round(max(p.imag for p in problem_input))
     best = 0
@@ -59,9 +57,3 @@ def star2(problem_input:dict[complex,str]) -> int:
         best = max(best, energization_from_start(problem_input, -1       + y*1j, DIR.RG))
         best = max(best, energization_from_start(problem_input, (maxx+1) + y*1j, DIR.LF))
     return best
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

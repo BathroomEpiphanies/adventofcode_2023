@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from itertools import combinations
 from typing import NamedTuple
 
@@ -36,15 +34,11 @@ class Universe:
         return distances_sum
 
 
-def star1(problem_input:Universe) -> int:
-    return problem_input.distances_sum(expansion=2)
+def part1(problem_input:Universe, *metadata:str) -> int:
+    expansion = int(metadata[0])
+    return problem_input.distances_sum(int(expansion))
 
 
-def star2(problem_input:Universe) -> int:
-    return problem_input.distances_sum(expansion=1_000_000)
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')
+def part2(problem_input:Universe, *metadata:str) -> int:
+    expansion = int(metadata[0])
+    return problem_input.distances_sum(int(expansion))

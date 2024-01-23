@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from collections import deque
 from enum import Enum
 
@@ -22,7 +20,7 @@ class D(complex, Enum):
     D = +0+1j
 
 
-def star1(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
+def part1(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
     steps_target,start_position,grounds = problem_input
     reachable_in_even_steps = {start_position}
     visited = set()
@@ -44,7 +42,7 @@ def star1(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
     return len(reachable_in_even_steps)
 
 
-def star2(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
+def part2(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
     """
     The input consists of two diamond shapes, or discs with manhattan distance
     radius 131. There are enough free paths to ensure that all positions that
@@ -149,9 +147,3 @@ def star2(problem_input:tuple[int,complex,dict[complex,str]]) -> int:
               (reachable_in_cycles[i-4]-reachable_in_cycles[i-6])
         )
     return reachable_in_cycles[cycles]
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

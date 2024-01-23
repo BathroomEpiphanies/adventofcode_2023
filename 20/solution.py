@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import abc
-import sys
 
 from collections import deque
 from functools import reduce
@@ -111,7 +110,6 @@ class Network:
     def broadcast(self, sender:str, targets:list[str], signal:bool) -> None:
         for target in targets:
             self.queue.append((sender, target, signal))
-        #print(self.queue)
     
     def run(self) -> None:
         global iterations
@@ -129,18 +127,17 @@ class Network:
 
 
 
-def star1(problem_input:Network) -> int:
+def part1(problem_input:Network) -> int:
     problem_input.reset()
     for _ in range(1000):
         problem_input.broadcast('button', ['broadcaster'], False)
         problem_input.run()
-    print(problem_input.pulses)
     return problem_input.pulses[False]*problem_input.pulses[True]
 
 
 iterations = 0
 gate_cycle_lengths = {'qx':0, 'rk':0, 'cd':0, 'zf':0}
-def star2(problem_input:Network) -> int:
+def part2(problem_input:Network) -> int:
     global iterations
     global gate_cycle_lengths
     problem_input.reset()
@@ -151,12 +148,4 @@ def star2(problem_input:Network) -> int:
         problem_input.run()
         if all(gcl!=0 for gcl in gate_cycle_lengths.values()):
             break
-        
-    print(gate_cycle_lengths.values())
     return reduce(mul, (gcl+1 for gcl in gate_cycle_lengths.values()))
-
-
-if __name__ == '__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')
